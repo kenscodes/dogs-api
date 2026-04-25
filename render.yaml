@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: dogs-api
+    env: docker
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10000
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
