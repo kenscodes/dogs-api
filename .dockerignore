@@ -1,0 +1,8 @@
+*.db
+*.db-shm
+*.db-wal
+data/
+.git
+.gitignore
+README.md
+render.yaml
