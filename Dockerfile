@@ -1,7 +1,10 @@
 # Build stage
-FROM golang:1.21-alpine AS builder
+FROM golang:1.21-bookworm AS builder
 
 WORKDIR /app
+
+# Install gcc for CGO (required for SQLite)
+RUN apt-get update && apt-get install -y gcc
 
 # Copy go mod files
 COPY go.mod go.sum* ./
@@ -10,13 +13,16 @@ RUN go mod download
 # Copy backend source
 COPY backend/ ./backend/
 
+# Copy frontend files
+COPY frontend/ ./frontend/
+
 # Build the application
 RUN cd backend && CGO_ENABLED=1 GOOS=linux go build -a -installsuffix cgo -o dogs-api main.go
 
 # Runtime stage
-FROM alpine:latest
+FROM debian:bookworm-slim
 
-RUN apk --no-cache add ca-certificates sqlite
+RUN apt-get update && apt-get install -y ca-certificates sqlite3 && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root/
 
