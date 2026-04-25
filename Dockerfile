@@ -43,4 +43,5 @@ EXPOSE 8080
 
 # Run the application with persistent database
 ENV DB_PATH=/data/dogs.db
+ENV FRONTEND_PATH=/root/frontend
 CMD ["./dogs-api"]

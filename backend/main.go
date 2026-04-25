@@ -68,7 +68,11 @@ func main() {
 	r.HandleFunc("/api/dogs/{id}", deleteDog).Methods("DELETE")
 
 	// Serve static files
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("../frontend")))
+	frontendPath := os.Getenv("FRONTEND_PATH")
+	if frontendPath == "" {
+		frontendPath = "../frontend"
+	}
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir(frontendPath)))
 
 	// CORS handler
 	c := cors.New(cors.Options{
