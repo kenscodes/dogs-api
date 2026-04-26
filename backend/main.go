@@ -62,7 +62,6 @@ func main() {
 	r.HandleFunc("/api/dogs", getDogs).Methods("GET")
 	r.HandleFunc("/api/dogs/{id}", getDog).Methods("GET")
 	r.HandleFunc("/api/dogs/breed/{breed}", getDogByBreed).Methods("GET")
-	r.HandleFunc("/api/dogs/search", searchDogs).Methods("GET")
 	r.HandleFunc("/api/dogs", createDog).Methods("POST")
 	r.HandleFunc("/api/dogs/{id}", updateDog).Methods("PUT")
 	r.HandleFunc("/api/dogs/{id}", deleteDog).Methods("DELETE")
@@ -224,38 +223,6 @@ func getDogByBreed(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sendResponse(w, http.StatusOK, "Retrieved dog", dog)
-}
-
-func searchDogs(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query().Get("query")
-	if query == "" {
-		getDogs(w, r)
-		return
-	}
-
-	query = "%" + strings.ToLower(query) + "%"
-	rows, err := db.Query(
-		"SELECT id, breed, sub_breeds, active, created_at, updated_at FROM dogs WHERE active = 1 AND (LOWER(breed) LIKE ? OR LOWER(sub_breeds) LIKE ?) ORDER BY updated_at DESC",
-		query, query,
-	)
-	if err != nil {
-		sendError(w, http.StatusInternalServerError, err.Error())
-		return
-	}
-	defer rows.Close()
-
-	dogs := []Dog{}
-	for rows.Next() {
-		var dog Dog
-		err := rows.Scan(&dog.ID, &dog.Breed, &dog.SubBreeds, &dog.Active, &dog.CreatedAt, &dog.UpdatedAt)
-		if err != nil {
-			sendError(w, http.StatusInternalServerError, err.Error())
-			return
-		}
-		dogs = append(dogs, dog)
-	}
-
-	sendResponse(w, http.StatusOK, "Search results", dogs)
 }
 
 func createDog(w http.ResponseWriter, r *http.Request) {
