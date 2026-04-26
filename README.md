@@ -6,7 +6,6 @@ A full-stack web application for managing dog breeds with CRUD operations, persi
 
 - **Full CRUD Operations**: Create, Read, Update, and Delete dog breeds
 - **Persistent Storage**: SQLite database for data persistence
-- **Search Functionality**: Search dogs by breed name or sub-breeds
 - **Minimalist UI**: Clean, simple list view built with vanilla JavaScript
 - **RESTful API**: Well-structured REST API endpoints
 - **Timestamps**: Track when dogs were created and last updated
@@ -71,11 +70,6 @@ GET /api/dogs/{id}
 GET /api/dogs/breed/{breed}
 ```
 
-### Search Dogs
-```http
-GET /api/dogs/search?query={search_term}
-```
-
 ### Create Dog
 ```http
 POST /api/dogs
@@ -127,7 +121,6 @@ Open your browser and navigate to: **http://localhost:8080**
 
 ### Features
 - **List View**: View all dog breeds in a clean, scannable list
-- **Search**: Instant search by breed name or sub-breeds
 - **Add New Dog**: Create new dog breeds with optional sub-breeds
 - **Edit**: Update existing dog breeds
 - **Delete**: Soft-delete dog breeds (data persists but is hidden)
@@ -208,18 +201,14 @@ curl -X PUT http://localhost:8080/api/dogs/1 \
 
 # Delete a dog
 curl -X DELETE http://localhost:8080/api/dogs/1
-
-# Search dogs
-curl http://localhost:8080/api/dogs/search?query=retriever
 ```
 
 ### Using the Web Interface
 
 1. Open `http://localhost:8080` in your browser
-2. Use the search box to find specific breeds
-3. Click "+ Add" to create a new breed
-4. Use the Edit/Delete buttons on each list item to manage dogs
-5. View timestamps to see when dogs were last updated
+2. Click "+ Add" to create a new breed
+3. Use the Edit/Delete buttons on each list item to manage dogs
+4. View timestamps to see when dogs were last updated
 
 ## 🔒 Security
 

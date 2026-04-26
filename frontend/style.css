@@ -31,23 +31,6 @@ header h1 {
     margin-bottom: 20px;
 }
 
-.search-box {
-    flex: 1;
-}
-
-.search-box input {
-    width: 100%;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-.search-box input:focus {
-    outline: none;
-    border-color: #666;
-}
-
 .btn {
     padding: 10px 20px;
     border: none;

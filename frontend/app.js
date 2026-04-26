@@ -5,16 +5,6 @@ let dogToDelete = null;
 // Load dogs on page load
 document.addEventListener('DOMContentLoaded', loadDogs);
 
-// Search functionality
-document.getElementById('searchInput').addEventListener('input', debounce(function(e) {
-    const query = e.target.value.trim();
-    if (query) {
-        searchDogs(query);
-    } else {
-        loadDogs();
-    }
-}, 300));
-
 // Form submission
 document.getElementById('dogForm').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -89,18 +79,6 @@ async function loadDogs() {
     } catch (error) {
         showNotification('Error loading dogs', 'error');
         document.getElementById('dogsContainer').innerHTML = '<div class="error">Error loading dogs</div>';
-    }
-}
-
-async function searchDogs(query) {
-    try {
-        const response = await fetch(`${API_BASE}/search?query=${encodeURIComponent(query)}`);
-        const result = await response.json();
-        if (result.success) {
-            renderDogs(result.data);
-        }
-    } catch (error) {
-        showNotification('Error searching dogs', 'error');
     }
 }
 
@@ -194,14 +172,3 @@ function showNotification(message, type) {
     }, 3000);
 }
 
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
