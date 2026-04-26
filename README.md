@@ -67,6 +67,21 @@ Open your web browser and navigate to:
 
 You should see the Dogs API interface with a list of dog breeds.
 
+### Step 5: Test the Application
+
+**Recommended Testing Order:**
+1. **Chrome Incognito** - Test first to confirm functionality works
+2. **Regular Chrome** - Test normal browsing
+3. **Safari Private Window** - Test Safari compatibility
+4. **Regular Safari** - Test after confirming private window works
+
+**Test These Features:**
+- Click "+ Add" button to create a new breed
+- Click "Edit" button to modify existing breeds  
+- Click "Delete" button to remove breeds
+- Check that timestamps appear correctly
+- Verify success/error messages show properly
+
 ## 🌐 API Endpoints
 
 ### Get All Dogs
@@ -272,6 +287,18 @@ go run main.go
 ### Database errors
 
 The SQLite database (`dogs.db`) is automatically created on first run. If you encounter database errors, try deleting the `dogs.db` file and restarting the server - it will be recreated with fresh data.
+
+### Safari Browser Issues
+
+If buttons don't work in Safari, try these steps:
+
+1. **Test in Chrome Incognito First** - The app works in Chrome Incognito mode to confirm functionality
+2. **Clear Safari Cache** - Safari → History → Clear History → All History
+3. **Disable Safari Extensions** - Safari → Preferences → Extensions → Turn off all extensions
+4. **Test in Private Safari Window** - File → New Private Window
+5. **Check Safari Console** - Develop → Show Web Inspector → Look for JavaScript errors
+
+The Safari compatibility issue is due to stricter security policies. The code has been updated to use proper event listeners instead of inline onclick handlers.
 
 ## 🔒 Security
 
