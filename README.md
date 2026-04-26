@@ -31,27 +31,41 @@ A full-stack web application for managing dog breeds with CRUD operations, persi
 
 ## 🔧 Installation & Setup
 
-### 1. Clone the Repository
+### Step 1: Clone the Repository
+
+Open your terminal and run:
 
 ```bash
 git clone <repository-url>
 cd dogs-api
 ```
 
-### 2. Install Dependencies
+### Step 2: Install Go Dependencies
+
+Navigate to the backend directory and install the required Go packages:
 
 ```bash
 cd backend
 go mod download
 ```
 
-### 3. Run the Application
+### Step 3: Run the Application
+
+Start the Go server:
 
 ```bash
 go run main.go
 ```
 
-The application will start on `http://localhost:8080`
+You should see: `Server running on port 8080`
+
+### Step 4: Access the Web Interface
+
+Open your web browser and navigate to:
+
+**http://localhost:8080**
+
+You should see the Dogs API interface with a list of dog breeds.
 
 ## 🌐 API Endpoints
 
@@ -205,10 +219,59 @@ curl -X DELETE http://localhost:8080/api/dogs/1
 
 ### Using the Web Interface
 
-1. Open `http://localhost:8080` in your browser
-2. Click "+ Add" to create a new breed
-3. Use the Edit/Delete buttons on each list item to manage dogs
-4. View timestamps to see when dogs were last updated
+#### How to Add a New Dog Breed
+
+1. Click the **"+ Add"** button at the top of the page
+2. A modal will appear - enter the breed name (e.g., "Golden Retriever")
+3. Optionally add sub-breeds separated by commas (e.g., "American, English")
+4. Click **"Save"** to add the dog
+5. You'll see a success message and the new dog will appear in the list
+
+#### How to Edit a Dog Breed
+
+1. Find the dog breed you want to edit in the list
+2. Click the **"✏️ Edit"** button next to it
+3. Update the breed name or sub-breeds in the modal
+4. Click **"Save"** to save your changes
+
+#### How to Delete a Dog Breed
+
+1. Find the dog breed you want to delete in the list
+2. Click the **"🗑️ Delete"** button next to it
+3. A confirmation modal will appear
+4. Click **"Delete"** to confirm
+5. The dog will be removed from the list (soft delete - data is preserved in database)
+
+## ❓ Troubleshooting
+
+### "command not found: go" error
+
+If you see this error, Go is not installed on your system. Install Go from https://golang.org/dl/
+
+### "port 8080 already in use" error
+
+If port 8080 is already in use by another application, you can either:
+- Stop the other application using port 8080
+- Or change the port by setting the PORT environment variable:
+
+```bash
+PORT=3000 go run main.go
+```
+
+Then access the app at `http://localhost:3000`
+
+### Page not loading / 404 error
+
+Make sure you're running the server from the `backend` directory:
+
+```bash
+cd backend
+go run main.go
+```
+
+### Database errors
+
+The SQLite database (`dogs.db`) is automatically created on first run. If you encounter database errors, try deleting the `dogs.db` file and restarting the server - it will be recreated with fresh data.
 
 ## 🔒 Security
 
