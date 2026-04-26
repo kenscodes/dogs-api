@@ -13,7 +13,7 @@
         </header>
 
         <div class="controls">
-            <button class="btn btn-primary" onclick="openAddModal()">+ Add</button>
+            <button class="btn btn-primary" id="addBtn">+ Add</button>
         </div>
 
         <div id="dogsContainer" class="dogs-list">
@@ -36,7 +36,7 @@
                     <textarea id="subBreeds" placeholder="e.g., American, English"></textarea>
                 </div>
                 <div class="modal-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
@@ -49,7 +49,7 @@
             <h2>Delete?</h2>
             <p>Delete <strong id="deleteDogName"></strong>?</p>
             <div class="modal-actions">
-                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                <button type="button" class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
                 <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
             </div>
         </div>

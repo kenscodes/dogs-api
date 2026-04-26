@@ -3,7 +3,30 @@ let dogs = [];
 let dogToDelete = null;
 
 // Load dogs on page load
-document.addEventListener('DOMContentLoaded', loadDogs);
+document.addEventListener('DOMContentLoaded', function() {
+    loadDogs();
+    
+    // Add button event listener
+    document.getElementById('addBtn').addEventListener('click', openAddModal);
+    
+    // Cancel button event listener
+    document.getElementById('cancelBtn').addEventListener('click', closeModal);
+    
+    // Cancel delete button event listener
+    document.getElementById('cancelDeleteBtn').addEventListener('click', closeDeleteModal);
+    
+    // Event delegation for edit and delete buttons
+    document.getElementById('dogsContainer').addEventListener('click', function(e) {
+        if (e.target.classList.contains('edit-btn')) {
+            const id = parseInt(e.target.dataset.id);
+            openEditModal(id);
+        } else if (e.target.classList.contains('delete-btn')) {
+            const id = parseInt(e.target.dataset.id);
+            const breed = e.target.dataset.breed;
+            openDeleteModal(id, breed);
+        }
+    });
+});
 
 // Form submission
 document.getElementById('dogForm').addEventListener('submit', async function(e) {
@@ -102,8 +125,8 @@ function renderDogs(dogsToRender) {
                 ${dog.updatedAt ? `<div class="timestamp">Updated: ${formatDate(dog.updatedAt)}</div>` : ''}
             </div>
             <div class="dog-actions">
-                <button class="btn btn-secondary" onclick="openEditModal(${dog.id})">Edit</button>
-                <button class="btn btn-danger" onclick="openDeleteModal(${dog.id}, '${dog.breed}')">Delete</button>
+                <button class="btn btn-secondary edit-btn" data-id="${dog.id}">Edit</button>
+                <button class="btn btn-danger delete-btn" data-id="${dog.id}" data-breed="${dog.breed}">Delete</button>
             </div>
         </div>
     `).join('');
