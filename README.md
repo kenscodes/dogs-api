@@ -7,9 +7,10 @@ A full-stack web application for managing dog breeds with CRUD operations, persi
 - **Full CRUD Operations**: Create, Read, Update, and Delete dog breeds
 - **Persistent Storage**: SQLite database for data persistence
 - **Search Functionality**: Search dogs by breed name or sub-breeds
-- **Modern UI**: Clean, responsive web interface built with vanilla JavaScript
+- **Minimalist UI**: Clean, simple list view built with vanilla JavaScript
 - **RESTful API**: Well-structured REST API endpoints
-- **Real-time Stats**: Live statistics showing total breeds and sub-breeds
+- **Timestamps**: Track when dogs were created and last updated
+- **Sorted by Recency**: Recently modified dogs appear first
 
 ## 🛠️ Tech Stack
 
@@ -21,7 +22,7 @@ A full-stack web application for managing dog breeds with CRUD operations, persi
 
 ### Frontend
 - **Vanilla JavaScript**: No frameworks, pure JS
-- **CSS3**: Modern styling with gradients and animations
+- **CSS3**: Minimalist, clean styling
 - **Responsive Design**: Works on all screen sizes
 
 ## 📋 Prerequisites
@@ -113,7 +114,9 @@ CREATE TABLE dogs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     breed TEXT NOT NULL UNIQUE,
     sub_breeds TEXT,
-    active BOOLEAN DEFAULT 1
+    active BOOLEAN DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -123,12 +126,12 @@ CREATE TABLE dogs (
 Open your browser and navigate to: **http://localhost:8080**
 
 ### Features
-- **Dashboard**: View all dog breeds in a card grid layout
-- **Statistics**: Real-time count of total breeds and sub-breeds
+- **List View**: View all dog breeds in a clean, scannable list
 - **Search**: Instant search by breed name or sub-breeds
 - **Add New Dog**: Create new dog breeds with optional sub-breeds
 - **Edit**: Update existing dog breeds
 - **Delete**: Soft-delete dog breeds (data persists but is hidden)
+- **Timestamps**: See when each dog was last updated
 
 ## 🚀 Deployment
 
@@ -214,8 +217,9 @@ curl http://localhost:8080/api/dogs/search?query=retriever
 
 1. Open `http://localhost:8080` in your browser
 2. Use the search box to find specific breeds
-3. Click "Add New Dog" to create a new breed
-4. Use the Edit/Delete buttons on each card to manage dogs
+3. Click "+ Add" to create a new breed
+4. Use the Edit/Delete buttons on each list item to manage dogs
+5. View timestamps to see when dogs were last updated
 
 ## 🔒 Security
 
